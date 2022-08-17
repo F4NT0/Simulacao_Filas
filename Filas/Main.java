@@ -1,19 +1,11 @@
+
 public class Main {
     
-    /**
-     * Gerador de valores pseudo-aleatórios
-     * @param aleatorio
-     * @param atendMinimo
-     * @param atendMaximo
-     * @return double
-     */
-    private static double pseudoAleatorio(double aleatorio, int atendMinimo, int atendMaximo) {
-        double a = Double.valueOf(atendMinimo);
-        double b = Double.valueOf(atendMaximo);
-        return (b - a) * aleatorio + a;
-    }
-    
+    public int GlobalTime = 0;
+
     public static void main (String args[]) {
+
+        Random random = new Random();
 
         // valores iniciais
         int atendMinimo = 2;
@@ -29,7 +21,7 @@ public class Main {
         double valoresAleatorios[] = {0.2,0.7,0.5};
     
         for (double valor : valoresAleatorios) {
-            System.out.println(pseudoAleatorio(valor,atendMinimo,atendMaximo));
+            System.out.println(random.pseudoAleatorio(valor,atendMinimo,atendMaximo));
         }
     }
 }
