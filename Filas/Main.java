@@ -1,27 +1,33 @@
 
 public class Main {
-    
-    public int GlobalTime = 0;
 
     public static void main (String args[]) {
 
-        Random random = new Random();
-
-        // valores iniciais
-        int atendMinimo = 2;
-        int atendMaximo = 3;
-        int capacidade = 3;
-        int nroAtendentes = 1;
-        int chegadaMinima = 1;
-        int chegadaMaxima = 3;
+        Fila fila1 = new Fila(1, 3, 1, 2, 3, 6);
         
         double tempoInicial = 2.0;
+        //double valoresAleatorios[] = {0.2,0.7,0.5};
 
+        fila1.initClientesFila();
+        fila1.initTempoGlobal();
+        fila1.initEstadosFila();
 
-        double valoresAleatorios[] = {0.2,0.7,0.5};
-    
-        for (double valor : valoresAleatorios) {
-            System.out.println(random.pseudoAleatorio(valor,atendMinimo,atendMaximo));
+        System.out.println("Estados da Fila inicial:");
+        for(int i = 0 ; i < fila1.getEstadosFila().length ; i++) {
+            System.out.println("[" + i + "] = " + fila1.getEstadosFila()[i]);
         }
+
+        System.out.println("Tempo Global: " + fila1.getTempoGlobal());
+        System.out.println("Número de Clientes na fila inicial: " + fila1.getClientesFila());
+
+        fila1.contabilizaTempo(tempoInicial, fila1.getClientesFila());
+
+        System.out.println("Estados da fila após contabilizar o tempo:");
+        for(int i = 0 ; i < fila1.getEstadosFila().length ; i++) {
+            System.out.println("[" + i + "] = " + fila1.getEstadosFila()[i]);
+        }
+
+        System.out.println("Tempo global depois de contabilizado: " + fila1.getTempoGlobal());
+
     }
 }

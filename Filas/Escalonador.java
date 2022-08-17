@@ -17,5 +17,5 @@ public class Escalonador {
     public int next(){
         /*Remove and return */
         return queue.poll();
-    } 
+    }
 }
