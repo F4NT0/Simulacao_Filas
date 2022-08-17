@@ -31,7 +31,7 @@ U(2,3) = 2,2
 
 ### Classes necessárias
 
-Classe Evento = vai definir o tipo de chegada ou saida
-Classe Fila = quantas pessoas, tempo minimo/maximo de atendimento, tempo minimo/maximo de chegada na fila,
-Classe Escalonador = que é o Priority Queue do java
-Classe Random = onde ficam a geração dos valores aleatórios
+* Classe Evento = vai definir o tipo de chegada ou saida
+* Classe Fila = quantas pessoas, tempo minimo/maximo de atendimento, tempo minimo/maximo de chegada na fila,
+* Classe Escalonador = que é o Priority Queue do java
+* Classe Random = onde ficam a geração dos valores aleatórios
