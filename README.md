@@ -61,7 +61,7 @@ Exemplo 2: [**M/M/1**]()
 # Tópico 3) Simulação de uma fila simples
 
 * Núcleo de Simulação:
-    * Lista de eventos agendados (**Escalonador**).
+    * Lista de eventos agendados (**Escalonador**), utilizando o Priority Queue do java
     * Variável para o tamanho da fila.
     * Simulador (contadores de tempo dos estados).
 
@@ -71,19 +71,19 @@ Exemplo 2: [**M/M/1**]()
 
 ### Classes necessárias
 
-* Classe **Evento** = Onde vai ficar definido os métodos de chegada e saída.
-* Classe **Fila** = quantas pessoas, tempo minimo/maximo de atendimento, tempo minimo/maximo de chegada na fila.
-* Classe **Escalonador** = que é o Priority Queue do java, vai lidar com as chegadas e saídas dos clientes.
-* Classe **Random** = onde ficam a geração dos valores aleatórios.
+* Classe [**Evento**]() = Onde vai ficar definido os métodos de chegada e saída.
+* Classe [**Fila**]() = quantas pessoas, tempo minimo/maximo de atendimento, tempo minimo/maximo de chegada na fila.
+* Classe [**Escalonador**]() = que é o Priority Queue do java, vai lidar com as chegadas e saídas dos clientes.
+* Classe [**Random**]() = onde ficam a geração dos valores aleatórios.
 
 ### Passos
 
 1. Recebe como atributos a quantidade de pessoas possíveis na fila (K), para criar o vetor com todos os estados possíveis da fila.
     * Se o tamanho do K for 3, vai ter um vetor que vai de 0 á 3.
-    * Posição 0 significa que teve n horas com 0 pessoas na fila.
-    * Posição 1 significa que teve n horas com 1 pessoas na fila.
-    * Posição 2 significa que teve n horas com 2 pessoas na fila.
-    * Posição 3 significa que teve n horas com 3 pessoas na fila.
+    * Posição [**0**]() significa que teve n horas com [**0**]() pessoas na fila.
+    * Posição [**1**]() significa que teve n horas com [**1**]() pessoas na fila.
+    * Posição [**2**]() significa que teve n horas com [**2**]() pessoas na fila.
+    * Posição [**3**]() significa que teve n horas com [**3**]() pessoas na fila.
 
 2. A fila é iniciada com **zero**, ou seja, ainda não tem ninguém na fila, isso vai servir na hora do escalonador trabalhar com as chegadas e saídas.
 3. O tempo global é iniciado como **zero**, ele vai sendo incrementado a partir de um cálculo.

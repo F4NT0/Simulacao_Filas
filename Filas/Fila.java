@@ -48,6 +48,10 @@ public class Fila {
         this.clientesFila = clientesFila;
     }
 
+    public void updateClientesFila(){
+        clientesFila++;
+    }
+
     public void initClientesFila() {
         this.clientesFila = 0;
     }

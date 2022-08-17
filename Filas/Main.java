@@ -29,5 +29,7 @@ public class Main {
 
         System.out.println("Tempo global depois de contabilizado: " + fila1.getTempoGlobal());
 
+        
+
     }
 }

@@ -1,5 +1,7 @@
 
 public class Evento {
+
+    public Evento(){}
     
     public void chegada() {
         // contabiliza tempo
@@ -14,6 +16,8 @@ public class Evento {
         // }
         // evento = chegada(tempoGlobal + random(1...3))
         // escalonador.add(evento)
+
+
     } 
 
     public void saida() {
