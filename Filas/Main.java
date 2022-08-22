@@ -1,35 +1,40 @@
+import java.util.ArrayList;
 
+/**
+ * Classe principal para testar
+ */
 public class Main {
 
     public static void main (String args[]) {
 
-        Fila fila1 = new Fila(1, 3, 1, 2, 3, 6);
-        
-        double tempoInicial = 2.0;
-        //double valoresAleatorios[] = {0.2,0.7,0.5};
+        int c = 1; // número de atendentes (C)
+        int k = 3; // capacidade de pessoas na fila (K)
+        int chMin = 1; // tempo de chegada mínima de um cliente
+        int chMax = 3; // tempo de chegada máximo de um cliente
+        int atendMin = 2; // tempo de atendimento mínimo do cliente
+        int atendMax = 3; // tempo de atendimento máximo do cliente
 
-        fila1.initClientesFila();
-        fila1.initTempoGlobal();
-        fila1.initEstadosFila();
+        // Valores Aleatórios entre 0 e 1
+        ArrayList<Double> valoresAleatorios = new ArrayList<>();
+        valoresAleatorios.add(0.2);
+        valoresAleatorios.add(0.7);
+        valoresAleatorios.add(0.5);
+        valoresAleatorios.add(0.3);
 
-        System.out.println("Estados da Fila inicial:");
-        for(int i = 0 ; i < fila1.getEstadosFila().length ; i++) {
-            System.out.println("[" + i + "] = " + fila1.getEstadosFila()[i]);
-        }
+        Algoritmo algoritmo = new Algoritmo(1, 3, 1, 3, 2, 3, valoresAleatorios);
 
-        System.out.println("Tempo Global: " + fila1.getTempoGlobal());
-        System.out.println("Número de Clientes na fila inicial: " + fila1.getClientesFila());
-
-        fila1.contabilizaTempo(tempoInicial, fila1.getClientesFila());
-
-        System.out.println("Estados da fila após contabilizar o tempo:");
-        for(int i = 0 ; i < fila1.getEstadosFila().length ; i++) {
-            System.out.println("[" + i + "] = " + fila1.getEstadosFila()[i]);
-        }
-
-        System.out.println("Tempo global depois de contabilizado: " + fila1.getTempoGlobal());
-
-        
-
+        while(algoritmo.getRandom().tamanhoRandom() > 0) {
+            // evento = escalonador.next()
+            // if (evento.getTipo() == "ch") {
+                //chegada();
+            //} else {
+                // if (evento.getTipo() == "sa") {
+                        //saida();
+                //} else {
+                        //print("ERROR");
+                //}
+            //}
+        //}
+        // print vetor com o calculo dos resultados
     }
 }

@@ -1,21 +1,38 @@
 import java.util.PriorityQueue;
 
 /**
- * Escalonador
+ * Escalonador trata os Eventos da fila
  */
 public class Escalonador {
 
-    PriorityQueue<Integer> queue;
+    PriorityQueue<Evento> queue;
+    
     public Escalonador(){
-        queue = new PriorityQueue<Integer>();
-
+        queue = new PriorityQueue<Evento>();
     }
-    public void ch(int num){
-        queue.add(num);
+    
+    /**
+     * Adiciona um Evento no escalonador
+     * @param num
+     */
+    public void add(Evento evento){
+        queue.add(evento);
     }
 
-    public int next(){
+    /**
+     * Pega o primeiro da fila e o remove da fila
+     * @return 
+     */
+    public Evento next() {
         /*Remove and return */
         return queue.poll();
+    }
+
+    /**
+     * Verifica o primeiro evento da fila
+     * @return
+     */
+    public Evento verify() {
+        return queue.peek();
     }
 }

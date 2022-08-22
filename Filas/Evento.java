@@ -1,31 +1,29 @@
 
+/**
+ * Classe Objeto do Evento com o tipo e o tempo
+ */
 public class Evento {
+    private String tipoEvento;
+    private double tempo;
 
-    public Evento(){}
-    
-    public void chegada() {
-        // contabiliza tempo
-        // if fila < 3 {
-        //  fila++
-        // }
-        // if fila <= 1 {
-        //   evento = saida(tempoGlobal + random(2...3))
-        //   escalonador.add(evento)
-        // } else {
-        //       perda++
-        // }
-        // evento = chegada(tempoGlobal + random(1...3))
-        // escalonador.add(evento)
+    public Evento(String tipoEvento, double tempo) {
+        this.tipoEvento = tipoEvento;
+        this.tempo = tempo;
+    }
 
+    public String getTipoEvento() {
+        return tipoEvento;
+    }
 
-    } 
+    public void setTipoEvento(String tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
 
-    public void saida() {
-        // contabiliza tempo
-        // fila--
-        // if fila >= 1 {
-        //     evento = saida(tempoGlobal + random(2...3))
-        //     escalonador.add(evento)
-        // }
+    public double getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(double tempo) {
+        this.tempo = tempo;
     }
 }
