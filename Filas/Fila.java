@@ -6,12 +6,22 @@ public class Fila {
     private double[] estadosFila;
 
 
+    /**
+     * Construtor do Objeto de filas, necessita o valor da 
+     * capacidade de clientes na fila como atributo
+     * @param k
+     */
     public Fila(int k) {
         this.estadosFila = new double[k+1];
         this.tempoGlobal = 0.0;
         this.clientesFila = 0;
     }
 
+    /**
+     * Método que contabiliza o tempo quando é feito uma chegada ou saida
+     * @param tempo
+     * @param clientesFila
+     */
     public void contabilizaTempo(double tempo, int clientesFila) {
         double valorTempo = tempo - estadosFila[clientesFila];
         if (clientesFila <= estadosFila.length) {
@@ -22,10 +32,23 @@ public class Fila {
 
     // INICIALIZADORES E UPDATES
 
+    /**
+     * Incrementa o números de clientes na fila
+     */
     public void updateClientesFila(){
         clientesFila++;
     }
 
+    /**
+     * Decrementa o número de clientes na fila
+     */
+    public void downgradeClientesFila() {
+        clientesFila--;
+    }
+
+    /**
+     * Inicia o vetor de estados da fila com zeros
+     */
     public void initEstadosFila() {
         int verificador = 0;
         while (estadosFila.length > verificador) {

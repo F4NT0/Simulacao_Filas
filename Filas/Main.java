@@ -21,20 +21,22 @@ public class Main {
         valoresAleatorios.add(0.5);
         valoresAleatorios.add(0.3);
 
-        Algoritmo algoritmo = new Algoritmo(1, 3, 1, 3, 2, 3, valoresAleatorios);
-
+        // Iniciando o algoritmo e adicionando primeira chegada
+        Algoritmo algoritmo = new Algoritmo(c, k, chMin, chMax, atendMin, atendMax, valoresAleatorios);
+        algoritmo.primeiroEvento("ch", 2.0);
+         
         while(algoritmo.getRandom().tamanhoRandom() > 0) {
-            // evento = escalonador.next()
-            // if (evento.getTipo() == "ch") {
-                //chegada();
-            //} else {
-                // if (evento.getTipo() == "sa") {
-                        //saida();
-                //} else {
-                        //print("ERROR");
-                //}
-            //}
-        //}
-        // print vetor com o calculo dos resultados
+            Evento evento = algoritmo.getEscalonador().next();
+            if (evento.getTipoEvento().equals("ch")) {
+                algoritmo.chegada(evento);
+            } else {
+                if (evento.getTipoEvento().equals("sa")) {
+                        algoritmo.saida(evento);
+                } else {
+                        System.out.println("Erro!");
+                }
+            }
+        }
+        algoritmo.filaEstadosAtualizado();
     }
 }

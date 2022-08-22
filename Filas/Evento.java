@@ -6,11 +6,17 @@ public class Evento {
     private String tipoEvento;
     private double tempo;
 
+    /**
+     * Construtor do objeto Evento
+     * @param tipoEvento
+     * @param tempo
+     */
     public Evento(String tipoEvento, double tempo) {
         this.tipoEvento = tipoEvento;
         this.tempo = tempo;
     }
 
+    // GETTERS E SETTERS
     public String getTipoEvento() {
         return tipoEvento;
     }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
@@ -5,27 +6,38 @@ import java.util.PriorityQueue;
  */
 public class Escalonador {
 
-    PriorityQueue<Evento> queue;
+    PriorityQueue<Double> queue;
+    ArrayList<Evento> eventos;
     
+    /**
+     * Construtor do Escalonador, ele inicia uma priority queue de Eventos
+     */
     public Escalonador(){
-        queue = new PriorityQueue<Evento>();
+        queue = new PriorityQueue<Double>();
+        eventos = new ArrayList<Evento>();
     }
     
     /**
-     * Adiciona um Evento no escalonador
+     * Adiciona um Evento na lista de eventos e o tempo na queue
      * @param num
      */
     public void add(Evento evento){
-        queue.add(evento);
+        eventos.add(evento);
+        queue.add(evento.getTempo());
     }
 
     /**
-     * Pega o primeiro da fila e o remove da fila
-     * @return 
+     * Pega o primeiro tempo, procura o evento e o retorna
+     * @return Evento
      */
     public Evento next() {
-        /*Remove and return */
-        return queue.poll();
+        double tempo = queue.poll();
+        for (Evento evento : eventos) {
+            if (evento.getTempo() == tempo) {
+                return evento;
+            }
+        }
+        return null;
     }
 
     /**
@@ -33,6 +45,12 @@ public class Escalonador {
      * @return
      */
     public Evento verify() {
-        return queue.peek();
+        double tempo = queue.peek();
+        for (Evento evento : eventos) {
+            if (evento.getTempo() == tempo) {
+                return evento;
+            }
+        }
+        return null;
     }
 }

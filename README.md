@@ -70,17 +70,6 @@ Exemplo 2: [**M/M/1**]()
 
 ---
 
-* [**Inicio do Programa**]()
-
-1. É iniciado um vetor de K+1 posições vazio (se K = 3, vetor é `Array[4]`)
-2. É colocado o valor 0.0 em todas as posições do vetor
-3. É iniciado o tempo global em 0.0
-4. É iniciado o contador da fila em 0
-
-* [**Inicio da Simulação**]()
-
----
-
 ### Classes necessárias
 
 * Classe [**Evento**]() = Onde vai ficar definido os métodos de chegada e saída.
