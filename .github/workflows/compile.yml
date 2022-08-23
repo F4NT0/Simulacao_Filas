@@ -40,7 +40,7 @@ jobs:
           git status
           git config user.email "${{secrets.EMAIL}}"
           git config user.name "${{secrets.USER_NAME}}"
-          git add resultado.txt
+          git add .
           git commit -m "✔️ Testado e funcionando o simulador de filas"
       
     # Fazendo push pelo actions
