@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -67,11 +68,24 @@ public class Algoritmo {
         }
     }
 
-    public void filaEstadosAtualizado() {
+    /**
+     * Apresentação do resultado final do programa e resultados
+     */
+    public void filaEstadosResultadoFinal() {
         double filaSalva[] = fila.getEstadosFila();
+        double totalTempo = 0.0;
+        DecimalFormat tempo = new DecimalFormat("#.00000");
+        DecimalFormat percentagem = new DecimalFormat("#.00");
         for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println("Array [" + i + "] = " + filaSalva[i]);
+            System.out.println("Estado da fila " + i + " = " + tempo.format(filaSalva[i]) + " | probabilidade = " + percentagem.format(calculoProbabilidade(filaSalva[i], fila.getTempoGlobal())) + "%");
+            totalTempo += filaSalva[i];
         }
+        System.out.println("\nTotal dos valores no vetor = " + totalTempo + "\ntotal do tempo global =  " + fila.getTempoGlobal());
+    }
+
+    public double calculoProbabilidade(double valorPosicao, double valorFinal) {
+        double divisaoPercentagem = valorPosicao/valorFinal;
+        return divisaoPercentagem*100;
     }
 
     /**

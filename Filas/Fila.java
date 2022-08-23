@@ -23,10 +23,10 @@ public class Fila {
      * @param clientesFila
      */
     public void contabilizaTempo(double tempo, int clientesFila) {
-        double valorTempo = tempo - estadosFila[clientesFila];
+        double valorTempo = tempo - tempoGlobal;
         if (clientesFila <= estadosFila.length) {
-            estadosFila[clientesFila] = valorTempo;
-            setTempoGlobal(getTempoGlobal() + valorTempo);
+            estadosFila[clientesFila] = estadosFila[clientesFila] + valorTempo;
+            setTempoGlobal(tempoGlobal + valorTempo);
         }
     }
 

@@ -23,9 +23,9 @@ public class Random {
      * @return double
      */
     public double pseudoAleatorio(double aleatorio, int min, int max) {
-        double a = Double.valueOf(min);
-        double b = Double.valueOf(max);
-        return (b - a) * aleatorio + a;
+        //double a = Double.valueOf(min);
+        //double b = Double.valueOf(max);
+        return (max - min) * aleatorio + min;
     }
 
     /**

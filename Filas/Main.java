@@ -10,16 +10,19 @@ public class Main {
         int c = 1; // número de atendentes (C)
         int k = 3; // capacidade de pessoas na fila (K)
         int chMin = 1; // tempo de chegada mínima de um cliente
-        int chMax = 3; // tempo de chegada máximo de um cliente
-        int atendMin = 2; // tempo de atendimento mínimo do cliente
-        int atendMax = 3; // tempo de atendimento máximo do cliente
+        int chMax = 2; // tempo de chegada máximo de um cliente
+        int atendMin = 3; // tempo de atendimento mínimo do cliente
+        int atendMax = 6; // tempo de atendimento máximo do cliente
 
         // Valores Aleatórios entre 0 e 1
         ArrayList<Double> valoresAleatorios = new ArrayList<>();
-        valoresAleatorios.add(0.2);
-        valoresAleatorios.add(0.7);
-        valoresAleatorios.add(0.5);
-        valoresAleatorios.add(0.3);
+        valoresAleatorios.add(0.3276);
+        valoresAleatorios.add(0.8851);
+        valoresAleatorios.add(0.1643);
+        valoresAleatorios.add(0.5542);
+        valoresAleatorios.add(0.6813);
+        valoresAleatorios.add(0.7221);
+        valoresAleatorios.add(0.9881);
 
         // Iniciando o algoritmo e adicionando primeira chegada
         Algoritmo algoritmo = new Algoritmo(c, k, chMin, chMax, atendMin, atendMax, valoresAleatorios);
@@ -37,6 +40,6 @@ public class Main {
                 }
             }
         }
-        algoritmo.filaEstadosAtualizado();
+        algoritmo.filaEstadosResultadoFinal();
     }
 }

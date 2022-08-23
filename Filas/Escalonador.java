@@ -27,14 +27,16 @@ public class Escalonador {
     }
 
     /**
-     * Pega o primeiro tempo, procura o evento e o retorna
+     * Pega o primeiro tempo, procura o evento e o remove e depois retorna
      * @return Evento
      */
     public Evento next() {
         double tempo = queue.poll();
         for (Evento evento : eventos) {
             if (evento.getTempo() == tempo) {
-                return evento;
+                Evento eventoRetorno = evento;
+                eventos.remove(evento);
+                return eventoRetorno;
             }
         }
         return null;
