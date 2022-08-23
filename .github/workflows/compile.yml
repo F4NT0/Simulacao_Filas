@@ -28,23 +28,5 @@ jobs:
             cd Filas
             javac Random.java Evento.java Fila.java Escalonador.java Algoritmo.java Main.java
             java Main
-            java Main >> resultado.txt
     
-    # Avisando que as infos foram salvas
-    - name: Adicionando que foi confirmado
-      run: echo "✔️ Workflow rodado com sucesso dia $(date +"%d/%m/%Y")!" >> datas_backup.txt
-          
-      # Criando um commit
-    - name: Criando um commit
-      run: |
-          git status
-          git config user.email "${{secrets.EMAIL}}"
-          git config user.name "${{secrets.USER_NAME}}"
-          git add .
-          git commit -m "✔️ Testado e funcionando o simulador de filas"
-      
-    # Fazendo push pelo actions
-    - uses: ad-m/github-push-action@master
-      with:
-          github_token: ${{secrets.TOKEN}}
-          force: true
+    
