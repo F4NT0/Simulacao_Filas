@@ -6,6 +6,9 @@ name: Java CI with Maven
 on:
   schedule:
     - cron: '0 14 * * *'
+    
+  # workflow_dispatch serve para poder rodar o action manualmente também
+  workflow_dispatch:
 
 jobs:
   build:
