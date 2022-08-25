@@ -5,14 +5,24 @@ import java.util.ArrayList;
  */
 public class Random {
 
-    private ArrayList<Double> entreZeroUm = new ArrayList<>(); //lista de valores aleatórios entre zero e um
-    
+    /*
+     * Valores globais
+     */
+    public double seed;
+    public double last;
+    public double min;
+    public double a;
+    public double m;
+    public double c;
+      
     /**
      * Construtor do objeto Random, necessita uma lista de valores aleatórios entre 0 e 1
      * @param valoresEntreZeroUm
      */
-    public Random(ArrayList<Double> valoresEntreZeroUm){
-        entreZeroUm = valoresEntreZeroUm;
+    public Random(double min, double max, double seed){
+        this.min = min;
+        this.m = max;
+        this. seed = this.last = seed;
     }
     
     /**
@@ -22,27 +32,40 @@ public class Random {
      * @param atendMaximo
      * @return double
      */
-    public double pseudoAleatorio(double aleatorio, int min, int max) {
-        //double a = Double.valueOf(min);
-        //double b = Double.valueOf(max);
-        return (max - min) * aleatorio + min;
+    public double next() {
+        last = (a * last + c) % m;
+        return last;
     }
 
     /**
      * Pega o primeiro aleatório entre 0 e 1 da lista
      * @return double
      */
-    public double pegaPrimeiroAleatorio() {
-        return entreZeroUm.remove(0);
+    public double entreZeroUm() {
+        return next()/m;
+    }
+
+
+    /*
+     * Retorna valor da sequencia desejado;
+     */
+
+    public double getN(int n){
+        double auxLast = seed;
+        for ( int i = 0; i >= n; i++ ) {
+            auxLast = (a * auxLast + c) % m;
+        }
+
+        return auxLast;
     }
 
     /**
      * Retorna o tamanho da lista de valores aleatórios entre 0 e 1
      * @return int
      */
-    public int tamanhoRandom() {
-        return entreZeroUm.size();
+    /*public int tamanhoRandom() {
+        return entreZeroUm().size;
     }
-
+    */
 
 }
