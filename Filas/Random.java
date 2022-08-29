@@ -14,12 +14,14 @@ public class Random {
     public double a;
     public double m;
     public double c;
+    public int size;
       
     /**
      * Construtor do objeto Random, necessita uma lista de valores aleatórios entre 0 e 1
      * @param valoresEntreZeroUm
      */
-    public Random(double min, double max, double seed){
+    public Random(double min, double max, double seed, int size){
+        this.size = size;
         this.min = min;
         this.m = max;
         this. seed = this.last = seed;
@@ -33,6 +35,7 @@ public class Random {
      * @return double
      */
     public double next() {
+        size--;
         last = (a * last + c) % m;
         return last;
     }
@@ -63,9 +66,9 @@ public class Random {
      * Retorna o tamanho da lista de valores aleatórios entre 0 e 1
      * @return int
      */
-    /*public int tamanhoRandom() {
-        return entreZeroUm().size;
+    public int tamanhoRandom() {
+        return size;
     }
-    */
+    
 
 }
