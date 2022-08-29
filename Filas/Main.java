@@ -15,15 +15,16 @@ public class Main {
         int atendMax = 6; // tempo de atendimento máximo do cliente
 
         // Valores Aleatórios entre 0 e 1
-        ArrayList<Double> valoresAleatorios = new ArrayList<>();
-        valoresAleatorios.add(0.3276);
-        valoresAleatorios.add(0.8851);
-        valoresAleatorios.add(0.1643);
-        valoresAleatorios.add(0.5542);
-        valoresAleatorios.add(0.6813);
-        valoresAleatorios.add(0.7221);
-        valoresAleatorios.add(0.9881);
-
+        //ArrayList<Double> valoresAleatorios = new ArrayList<>();
+        // valoresAleatorios.add(0.3276);
+        // valoresAleatorios.add(0.8851);
+        // valoresAleatorios.add(0.1643);
+        // valoresAleatorios.add(0.5542);
+        // valoresAleatorios.add(0.6813);
+        // valoresAleatorios.add(0.7221);
+        // valoresAleatorios.add(0.9881);
+        int valoresAleatorios = 10;
+        
         // Iniciando o algoritmo e adicionando primeira chegada
         Algoritmo algoritmo = new Algoritmo(c, k, chMin, chMax, atendMin, atendMax, valoresAleatorios);
         algoritmo.primeiroEvento("ch", 2.0);

@@ -15,14 +15,14 @@ public class Algoritmo {
     /**
      * Construtor do Objeto do algoritmo de chegadas e saídas
     */
-    public Algoritmo(int c, int k, int chMin, int chMax, int atendMin, int atendMax, ArrayList<Double> valoresAleatorios) {
+    public Algoritmo(int c, int k, int chMin, int chMax, int atendMin, int atendMax, int quantValores) {
         this.c = c;
         this.k = k;
         this.chMin = chMin;
         this.chMax = chMax;
         this.atendMin = atendMin;
         this.atendMax = atendMax;
-        this.random = new Random(valoresAleatorios);
+        this.random = new Random(chMin, chMax, quantValores);
         this.fila = new Fila(k);
         this.escalonador = new Escalonador();
     }
@@ -38,7 +38,7 @@ public class Algoritmo {
             fila.updateClientesFila();
         }
         if (fila.getClientesFila() <= 1) {
-            double aleatorio = random.pegaPrimeiroAleatorio();
+            double aleatorio = random.next();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
             Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
             escalonador.add(eventoSaida);
@@ -47,7 +47,7 @@ public class Algoritmo {
         }
 
         // nova chegada
-        double aleatorio = random.pegaPrimeiroAleatorio();
+        double aleatorio = random.next();
         double pseudoAleatorio = random.pseudoAleatorio(aleatorio, chMin, chMax);
         Evento novoEvento = new Evento("ch", (fila.getTempoGlobal() + pseudoAleatorio));
         escalonador.add(novoEvento);
@@ -61,7 +61,7 @@ public class Algoritmo {
         fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
         fila.downgradeClientesFila();
         if (fila.getClientesFila() >= 1) {
-            double aleatorio = random.pegaPrimeiroAleatorio();
+            double aleatorio = random.next();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
             Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
             escalonador.add(eventoSaida);

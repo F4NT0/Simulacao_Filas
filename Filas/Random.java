@@ -8,31 +8,40 @@ public class Random {
     /*
      * Valores globais
      */
-    public double seed;
+    public int size;
     public double last;
     public double min;
-    public double a;
     public double m;
-    public double c;
-    public int size;
+    public double seed = 2;
+    public double a = 2;
+    public double c = 1;
       
     /**
      * Construtor do objeto Random, necessita uma lista de valores aleatórios entre 0 e 1
      * @param valoresEntreZeroUm
      */
-    public Random(double min, double max, double seed, int size){
+    public Random(double min, double max, int size){
         this.size = size;
         this.min = min;
         this.m = max;
         this. seed = this.last = seed;
     }
-    
-    /**
+
+     /**
      * Gerador de valores pseudo-aleatórios
      * @param aleatorio
      * @param atendMinimo
      * @param atendMaximo
      * @return double
+     */
+    public double pseudoAleatorio(double aleatorio, int min, int max) {
+        //double a = Double.valueOf(min);
+        //double b = Double.valueOf(max);
+        return (max - min) * aleatorio + min;
+    }
+    
+    /**
+     * Gerador de valores aleatórios
      */
     public double next() {
         size--;
