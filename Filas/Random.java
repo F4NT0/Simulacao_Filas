@@ -43,6 +43,4 @@ public class Random {
     public int tamanhoRandom() {
         return entreZeroUm.size();
     }
-
-
 }

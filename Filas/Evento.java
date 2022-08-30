@@ -16,7 +16,9 @@ public class Evento {
         this.tempo = tempo;
     }
 
+    // =================
     // GETTERS E SETTERS
+    // =================
     public String getTipoEvento() {
         return tipoEvento;
     }

@@ -30,7 +30,9 @@ public class Fila {
         }
     }
 
+    // ==========================
     // INICIALIZADORES E UPDATES
+    // ==========================
 
     /**
      * Incrementa o números de clientes na fila
@@ -57,9 +59,9 @@ public class Fila {
         }
     }
 
-
+    // =================
     // GETTERS E SETTERS
-
+    // =================
     public double[] getEstadosFila() {
         return estadosFila;
     }
