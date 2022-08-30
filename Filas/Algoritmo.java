@@ -2,7 +2,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
- * Algoritmo da simulação da Fila
+ * Classe com o Algoritmo da simulação da Fila
  */
 public class Algoritmo {
 
@@ -11,6 +11,7 @@ public class Algoritmo {
     private Fila fila;
     private Escalonador escalonador;
     private int perdaClientes;
+    private Colors colors = new Colors();
 
     /**
      * Construtor do Objeto do algoritmo de chegadas e saídas
@@ -76,13 +77,21 @@ public class Algoritmo {
         double totalTempo = 0.0;
         DecimalFormat tempo = new DecimalFormat("#.00000");
         DecimalFormat percentagem = new DecimalFormat("#.00");
+
+        System.out.println("SIMULA\u00C7\u00C3O CONCLUIDA\n");
         for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println("Estado da fila " + i + " = " + tempo.format(filaSalva[i]) + " | probabilidade = " + percentagem.format(calculoProbabilidade(filaSalva[i], fila.getTempoGlobal())) + "%");
+            System.out.println("Estado da fila " + i + " = " + colors.BLUE_BRIGHT + tempo.format(filaSalva[i]) + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + percentagem.format(calculoProbabilidade(filaSalva[i], fila.getTempoGlobal())) + "%" + colors.RESET);
             totalTempo += filaSalva[i];
         }
-        System.out.println("\nTotal dos valores no vetor = " + totalTempo + "\ntotal do tempo global =  " + fila.getTempoGlobal());
+        System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + getPerdaClientes() + "\n");
     }
 
+    /**
+     * Método do calculo da probabilidade para o retorno
+     * @param valorPosicao
+     * @param valorFinal
+     * @return double
+     */
     public double calculoProbabilidade(double valorPosicao, double valorFinal) {
         double divisaoPercentagem = valorPosicao/valorFinal;
         return divisaoPercentagem*100;
@@ -98,8 +107,9 @@ public class Algoritmo {
         escalonador.add(evento);
     }
 
+    // =================
     // GETTERS E SETTERS
-    
+    // =================
     public int getC() {
         return c;
     }
