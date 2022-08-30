@@ -35,7 +35,7 @@ valoresAleatorios.add(0.9881);
 
 ### Como rodar o projeto no Windows
 
-* Utilize o arquivo **runner.ps1** para fazer a compilação do projeto e apresentar no console o resultado
+* Utilize o arquivo [**runner.ps1**]() para fazer a compilação do projeto e apresentar no console o resultado
 * Para deixar o powershell compilar scripts para ele, abra as opções no desktop com <kbd>Windows</kbd> + <kbd>X</kbd>
 * selecione **Windows Powershell(Admin)**
 * Rode o comando abaixo:
@@ -50,4 +50,21 @@ valoresAleatorios.add(0.9881);
 ```shell
 java --version
 javac --version
+```
+
+* Com isso, é só rodar o Script de Powershell chamado [**runner.ps1**]() no diretório principal desse projeto
+
+### Como rodar o projeto no Linux
+
+* Utilize o arquivo [**runner.sh**]() para fazer a compilação do projeto no linux
+* Para tornar o Script executável, utilize o seguinte comando no seu console:
+
+```shell
+chmod +x runner.sh
+```
+
+* Para executar somente utilize o comando abaixo no console
+
+```shell
+./runner.sh
 ```

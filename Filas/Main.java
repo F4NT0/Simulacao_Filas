@@ -1,8 +1,10 @@
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main (String args[]) {
+        Colors colors = new Colors();
 
         // =====================================================
         // AREA DE COLOCAR OS DADOS NECESSARIOS PARA A SIMULACAO
@@ -28,18 +30,18 @@ public class Main {
         // ====================================================
         // SIMULADOR INICIADO E APRESENTAÇÃO DOS DADOS INICIAIS
         // ====================================================
-        System.out.println("===========================================");
+        System.out.println(colors.BLUE + "===========================================");
         System.out.println("============ SIMULADOR DE FILAS ===========");
-        System.out.println("===========================================");
-        System.out.println("| Nota\u00E7\u00E3o: G/G/" + c + "/" + k);
-        System.out.println("| Chegada Minima: " + chMin + " - Chegada Maxima: " + chMax);
-        System.out.println("| Atendimento Minimo: " + atendMin + " - Atendimento Maximo: " + atendMax);
-        System.out.println("| Tempo Global do primeiro cliente: " + tempoGlobalInicial);
+        System.out.println("===========================================" + colors.RESET);
+        System.out.println(colors.RED + "| Nota\u00E7\u00E3o: G/G/" + c + "/" + k + colors.RESET);
+        System.out.println(colors.GREEN + "| Chegada Minima: " + chMin + " - Chegada Maxima: " + chMax + colors.RESET);
+        System.out.println(colors.CYAN + "| Atendimento Minimo: " + atendMin + " - Atendimento Maximo: " + atendMax + colors.RESET);
+        System.out.println(colors.PURPLE + "| Tempo Global do primeiro cliente: " + tempoGlobalInicial + colors.RESET);
         System.out.print("| Valores Aleat\u00F3rios definidos: ");
         for (Double valor : valoresAleatorios) {
-            System.out.print(valor + " | ");
+            System.out.print(colors.YELLOW + valor + " | " + colors.RESET);
         }
-        System.out.println("\n=======================================\n");
+        System.out.println(colors.BLUE + "\n=======================================\n" + colors.RESET);
 
         // =================================================
         // ALGORITMO DE INICIAÇÃO E TRARAMENTO DA SIMULAÇÃO
