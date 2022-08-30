@@ -36,8 +36,18 @@ valoresAleatorios.add(0.9881);
 ### Como rodar o projeto no Windows
 
 * Utilize o arquivo **runner.ps1** para fazer a compilação do projeto e apresentar no console o resultado
-* Para deixar o powershell compilar scripts para ele, deve ser colocado o seguinte comando como administrador:
+* Para deixar o powershell compilar scripts para ele, abra as opções no desktop com <kbd>Windows</kbd> + <kbd>X</kbd>
+* selecione **Windows Powershell(Admin)**
+* Rode o comando abaixo:
 
 ```powershell
+> Set-ExecutionPolicy RemoteSigned
+```
 
+* Agora qualquer arquivos com a extensão **.ps1** é um script rodável no powershell
+* Verifique se o seu powershell possui **Java** e **Javac** instalados:
+
+```shell
+java --version
+javac --version
 ```
