@@ -8,11 +8,11 @@ public class Main {
     public static void main (String args[]) {
 
         int c = 1; // número de atendentes (C)
-        int k = 3; // capacidade de pessoas na fila (K)
-        int chMin = 1; // tempo de chegada mínima de um cliente
-        int chMax = 2; // tempo de chegada máximo de um cliente
+        int k = 5; // capacidade de pessoas na fila (K)
+        int chMin = 2; // tempo de chegada mínima de um cliente
+        int chMax = 4; // tempo de chegada máximo de um cliente
         int atendMin = 3; // tempo de atendimento mínimo do cliente
-        int atendMax = 6; // tempo de atendimento máximo do cliente
+        int atendMax = 5; // tempo de atendimento máximo do cliente
 
         // Valores Aleatórios entre 0 e 1
         //ArrayList<Double> valoresAleatorios = new ArrayList<>();
@@ -23,11 +23,11 @@ public class Main {
         // valoresAleatorios.add(0.6813);
         // valoresAleatorios.add(0.7221);
         // valoresAleatorios.add(0.9881);
-        int valoresAleatorios = 10;
+        int valoresAleatorios = 100000;
         
         // Iniciando o algoritmo e adicionando primeira chegada
         Algoritmo algoritmo = new Algoritmo(c, k, chMin, chMax, atendMin, atendMax, valoresAleatorios);
-        algoritmo.primeiroEvento("ch", 2.0);
+        algoritmo.primeiroEvento("ch", 3.0);
          
         while(algoritmo.getRandom().tamanhoRandom() > 0) {
             Evento evento = algoritmo.getEscalonador().next();

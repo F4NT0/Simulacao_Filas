@@ -34,15 +34,17 @@ public class Algoritmo {
     public void chegada(Evento evento) {
         
         fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
-        if (fila.getClientesFila() < 3) {
+        if (fila.getClientesFila() < k) {
             fila.updateClientesFila();
+        
+            if (fila.getClientesFila() <= c) {
+                double aleatorio = random.next();
+                double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
+                Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
+                escalonador.add(eventoSaida);
+            }
         }
-        if (fila.getClientesFila() <= 1) {
-            double aleatorio = random.next();
-            double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
-            Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
-            escalonador.add(eventoSaida);
-        } else {
+        else {
             perdaClientes++;
         }
 
@@ -60,7 +62,7 @@ public class Algoritmo {
     public void saida(Evento evento) {
         fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
         fila.downgradeClientesFila();
-        if (fila.getClientesFila() >= 1) {
+        if (fila.getClientesFila() >= c) {
             double aleatorio = random.next();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
             Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
@@ -74,12 +76,13 @@ public class Algoritmo {
     public void filaEstadosResultadoFinal() {
         double filaSalva[] = fila.getEstadosFila();
         double totalTempo = 0.0;
-        DecimalFormat tempo = new DecimalFormat("#.00000");
-        DecimalFormat percentagem = new DecimalFormat("#.00");
+        //DecimalFormat tempo = new DecimalFormat("#.00000");
+        //DecimalFormat percentagem = new DecimalFormat("#.00");
         for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println("Estado da fila " + i + " = " + tempo.format(filaSalva[i]) + " | probabilidade = " + percentagem.format(calculoProbabilidade(filaSalva[i], fila.getTempoGlobal())) + "%");
+            System.out.println("Estado da fila " + i + " = " + filaSalva[i] + " | probabilidade = " + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%");
             totalTempo += filaSalva[i];
         }
+        System.out.println("Perda: " + perdaClientes);
         System.out.println("\nTotal dos valores no vetor = " + totalTempo + "\ntotal do tempo global =  " + fila.getTempoGlobal());
     }
 
