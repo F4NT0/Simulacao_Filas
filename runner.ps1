@@ -1,5 +1,13 @@
+#==================================
+# RUNNER DO PROJETO PELO POWERSHELL
+#==================================
+
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
-cd .\Filas
-javac Random.java Evento.java Fila.java Escalonador.java Algoritmo.java Main.java
+cd Apresentacao
+javac -d ..\Filas\ *.java
+cd ..
+cd Filas
+javac *.java
 java Main
+rmdir *.class
 cd ..

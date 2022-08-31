@@ -4,6 +4,7 @@ public class Fila {
     private int clientesFila;
     private double tempoGlobal;
     private double[] estadosFila;
+    private int perdaClientes;
 
 
     /**
@@ -80,5 +81,13 @@ public class Fila {
 
     public void setTempoGlobal(double tempoGlobal) {
         this.tempoGlobal = tempoGlobal;
+    }
+
+    public int getPerdaClientes() {
+        return perdaClientes;
+    }
+
+    public void setPerdaClientes(int perdaClientes) {
+        this.perdaClientes = perdaClientes;
     }
 }

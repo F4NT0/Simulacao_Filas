@@ -23,10 +23,9 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
-    - name: Run Project
+    - name: PROJETO COMPILADO AQUI
       run: |
-            cd Filas
-            javac Random.java Evento.java Fila.java Escalonador.java Algoritmo.java Main.java
-            java Main
+            chmod +x runner.sh
+            ./runner.sh
     
     
