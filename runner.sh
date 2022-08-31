@@ -8,5 +8,5 @@ cd ..
 cd Filas
 javac *.java
 java Main
-rmdir *.class
+ls -la
 cd ..
