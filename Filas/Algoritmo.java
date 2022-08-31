@@ -81,7 +81,7 @@ public class Algoritmo {
 
         System.out.println("SIMULA\u00C7\u00C3O CONCLUIDA\n");
         for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println("Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i] + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
+            System.out.println("Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
             totalTempo += filaSalva[i];
         }
         System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + getPerdaClientes() + "\n");

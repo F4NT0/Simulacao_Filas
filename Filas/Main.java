@@ -25,6 +25,26 @@ public class Main {
         valoresAleatorios.add(0.6813);
         valoresAleatorios.add(0.7221);
         valoresAleatorios.add(0.9881);
+        valoresAleatorios.add(0.5);
+        valoresAleatorios.add(0.6);
+        valoresAleatorios.add(0.3276);
+        valoresAleatorios.add(0.8851);
+        valoresAleatorios.add(0.1643);
+        valoresAleatorios.add(0.5542);
+        valoresAleatorios.add(0.6813);
+        valoresAleatorios.add(0.7221);
+        valoresAleatorios.add(0.9881);
+        valoresAleatorios.add(0.5);
+        valoresAleatorios.add(0.6);
+        valoresAleatorios.add(0.3276);
+        valoresAleatorios.add(0.8851);
+        valoresAleatorios.add(0.1643);
+        valoresAleatorios.add(0.5542);
+        valoresAleatorios.add(0.6813);
+        valoresAleatorios.add(0.7221);
+        valoresAleatorios.add(0.9881);
+        valoresAleatorios.add(0.5);
+        valoresAleatorios.add(0.6);
 
         // ====================================================
         // SIMULADOR INICIADO E APRESENTAÇÃO DOS DADOS INICIAIS
