@@ -1,8 +1,12 @@
 
+import Apresentacao.Colors;
+import Apresentacao.Visual;
+
 public class Main {
 
     public static void main (String args[]) {
         Colors colors = new Colors();
+        Visual visual = new Visual();
 
         // =====================================================
         // AREA DE COLOCAR OS DADOS NECESSARIOS PARA A SIMULACAO
@@ -20,18 +24,11 @@ public class Main {
         // ====================================================
         // SIMULADOR INICIADO E APRESENTAÇÃO DOS DADOS INICIAIS
         // ====================================================
-        System.out.println(colors.BLUE + "===========================================" + colors.RESET);
-        System.out.println(colors.BLUE + "============ SIMULADOR DE FILAS ===========" + colors.RESET);
-        System.out.println(colors.BLUE + "===========================================" + colors.RESET);
-        System.out.println(colors.RED + "| Nota\u00E7\u00E3o: G/G/" + c + "/" + k + colors.RESET);
-        System.out.println(colors.GREEN + "| Chegada Minima: " + chMin + " - Chegada Maxima: " + chMax + colors.RESET);
-        System.out.println(colors.CYAN + "| Atendimento Minimo: " + atendMin + " - Atendimento Maximo: " + atendMax + colors.RESET);
-        System.out.println(colors.PURPLE + "| Tempo Global do primeiro cliente: " + tempoGlobalInicial + colors.RESET);
-        //System.out.print("| Valores Aleat\u00F3rios definidos: ");
-        //for (Double valor : valoresAleatorios) {
-        //    System.out.print(colors.YELLOW + valor + " | " + colors.RESET);
-        //}
-        System.out.println(colors.BLUE + "\n=======================================\n" + colors.RESET);
+        visual.quadroApresentacaoSimulador();
+        System.out.println(colors.RED + "\u2551 Nota\u00E7\u00E3o: G/G/" + c + "/" + k + colors.RESET);
+        System.out.println(colors.GREEN + "\u2551 Chegada Minima: " + chMin + " - Chegada Maxima: " + chMax + colors.RESET);
+        System.out.println(colors.CYAN + "\u2551 Atendimento Minimo: " + atendMin + " - Atendimento Maximo: " + atendMax + colors.RESET);
+        System.out.println(colors.PURPLE + "\u2551 Tempo Global do primeiro cliente: " + tempoGlobalInicial + colors.RESET);
 
         // =================================================
         // ALGORITMO DE INICIAÇÃO E TRARAMENTO DA SIMULAÇÃO

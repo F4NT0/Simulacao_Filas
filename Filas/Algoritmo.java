@@ -1,3 +1,5 @@
+import Apresentacao.Colors;
+import Apresentacao.Visual;
 
 /**
  * Classe com o Algoritmo da simulação da Fila
@@ -72,14 +74,15 @@ public class Algoritmo {
      * Apresentação do resultado final do programa e resultados
      */
     public void filaEstadosResultadoFinal() {
+        Visual visual = new Visual();
+
         double filaSalva[] = fila.getEstadosFila();
         double totalTempo = 0.0;
 
-        System.out.println("SIMULA\u00C7\u00C3O CONCLUIDA\n");
-        //DecimalFormat tempo = new DecimalFormat("#.00000");
-        //DecimalFormat percentagem = new DecimalFormat("#.00");
+       visual.quadroFinalizacaoSimulacao();
+
         for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println("Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
+            System.out.println(visual.meio() + " Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
             totalTempo += filaSalva[i];
         }
         System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + fila.getPerdaClientes() + "\n");
@@ -89,11 +92,23 @@ public class Algoritmo {
      * Método do calculo da probabilidade para o retorno
      * @param valorPosicao
      * @param valorFinal
-     * @return double
+     * @return String
      */
-    public double calculoProbabilidade(double valorPosicao, double valorFinal) {
+    public String calculoProbabilidade(double valorPosicao, double valorFinal) {
         double divisaoPercentagem = valorPosicao/valorFinal;
-        return divisaoPercentagem*100;
+        double percentagem = divisaoPercentagem*100;
+        String apresentacaoValor = Double.toString(percentagem).substring(0, 5);
+        return apresentacaoValor;
+    }
+
+    /**
+     * Método para ajuste do número de casas decimais dos valores do estado das posições na fila
+     * @param valorPosicao
+     * @return String
+     */
+    public String ajusteValorEstadoFila(double valorPosicao) {
+        String apresentacaoValor = Double.toString(valorPosicao).substring(0,11);
+        return apresentacaoValor;
     }
 
     /**
