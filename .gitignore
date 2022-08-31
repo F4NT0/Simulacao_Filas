@@ -1,8 +1,5 @@
 # Compiled class file
-*.class
-Filas/Apresentacao/
-Filas/*.class
-Apresentacao/*.class
+
 
 # Log file
 *.log
