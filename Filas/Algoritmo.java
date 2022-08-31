@@ -1,5 +1,3 @@
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 /**
  * Classe com o Algoritmo da simulação da Fila
@@ -16,14 +14,14 @@ public class Algoritmo {
     /**
      * Construtor do Objeto do algoritmo de chegadas e saídas
     */
-    public Algoritmo(int c, int k, int chMin, int chMax, int atendMin, int atendMax, ArrayList<Double> valoresAleatorios) {
+    public Algoritmo(int c, int k, int chMin, int chMax, int atendMin, int atendMax, int quantValores) {
         this.c = c;
         this.k = k;
         this.chMin = chMin;
         this.chMax = chMax;
         this.atendMin = atendMin;
         this.atendMax = atendMax;
-        this.random = new Random(valoresAleatorios);
+        this.random = new Random(chMin, chMax, quantValores);
         this.fila = new Fila(k);
         this.escalonador = new Escalonador();
     }
@@ -39,17 +37,18 @@ public class Algoritmo {
             fila.updateClientesFila();
         
             if (fila.getClientesFila() <= c) {
-                double aleatorio = random.pegaPrimeiroAleatorio();
+                double aleatorio = random.entreZeroUm();
                 double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
                 Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
                 escalonador.add(eventoSaida);
-            } 
-        } else {
+            }
+        }
+        else {
             perdaClientes++;
         }
 
         // nova chegada
-        double aleatorio = random.pegaPrimeiroAleatorio();
+        double aleatorio = random.entreZeroUm();
         double pseudoAleatorio = random.pseudoAleatorio(aleatorio, chMin, chMax);
         Evento novoEvento = new Evento("ch", (fila.getTempoGlobal() + pseudoAleatorio));
         escalonador.add(novoEvento);
@@ -63,7 +62,7 @@ public class Algoritmo {
         fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
         fila.downgradeClientesFila();
         if (fila.getClientesFila() >= c) {
-            double aleatorio = random.pegaPrimeiroAleatorio();
+            double aleatorio = random.entreZeroUm();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
             Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
             escalonador.add(eventoSaida);
@@ -76,15 +75,16 @@ public class Algoritmo {
     public void filaEstadosResultadoFinal() {
         double filaSalva[] = fila.getEstadosFila();
         double totalTempo = 0.0;
-        //DecimalFormat tempo = new DecimalFormat("#.00000");
-        //DecimalFormat percentagem = new DecimalFormat("#.00");
 
         System.out.println("SIMULA\u00C7\u00C3O CONCLUIDA\n");
+        //DecimalFormat tempo = new DecimalFormat("#.00000");
+        //DecimalFormat percentagem = new DecimalFormat("#.00");
         for (int i = 0 ; i < filaSalva.length ; i++) {
             System.out.println("Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
             totalTempo += filaSalva[i];
         }
         System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + getPerdaClientes() + "\n");
+        System.out.println("Perda: " + perdaClientes);
     }
 
     /**
