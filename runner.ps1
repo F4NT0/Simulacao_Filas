@@ -1,3 +1,7 @@
+#==================================
+# RUNNER DO PROJETO PELO POWERSHELL
+#==================================
+
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 cd Apresentacao
 javac -d ..\Filas\ *.java
