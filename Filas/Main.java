@@ -10,12 +10,12 @@ public class Main {
         // AREA DE COLOCAR OS DADOS NECESSARIOS PARA A SIMULACAO
         // =====================================================
         int c = 1; // número de atendentes (C)
-        int k = 3; // capacidade de pessoas na fila (K)
-        int chMin = 1; // tempo de chegada mínima de um cliente
-        int chMax = 2; // tempo de chegada máximo de um cliente
+        int k = 5; // capacidade de pessoas na fila (K)
+        int chMin = 2; // tempo de chegada mínima de um cliente
+        int chMax = 4; // tempo de chegada máximo de um cliente
         int atendMin = 3; // tempo de atendimento mínimo do cliente
-        int atendMax = 6; // tempo de atendimento máximo do cliente
-        double tempoGlobalInicial = 2.0; //tempo global do primeiro cliente
+        int atendMax = 5; // tempo de atendimento máximo do cliente
+        double tempoGlobalInicial = 3.0; //tempo global do primeiro cliente
 
         // Valores Aleatórios entre 0 e 1 colocados manualmente
         ArrayList<Double> valoresAleatorios = new ArrayList<>();
