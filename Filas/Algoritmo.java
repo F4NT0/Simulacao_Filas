@@ -8,7 +8,6 @@ public class Algoritmo {
     private Random random;
     private Fila fila;
     private Escalonador escalonador;
-    private int perdaClientes;
     private Colors colors = new Colors();
 
     /**
@@ -44,7 +43,7 @@ public class Algoritmo {
             }
         }
         else {
-            perdaClientes++;
+            fila.setPerdaClientes(fila.getPerdaClientes()+1);
         }
 
         // nova chegada
@@ -83,8 +82,7 @@ public class Algoritmo {
             System.out.println("Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
             totalTempo += filaSalva[i];
         }
-        System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + getPerdaClientes() + "\n");
-        System.out.println("Perda: " + perdaClientes);
+        System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + fila.getPerdaClientes() + "\n");
     }
 
     /**
@@ -145,9 +143,5 @@ public class Algoritmo {
 
     public Escalonador getEscalonador() {
         return escalonador;
-    }
-
-    public int getPerdaClientes() {
-        return perdaClientes;
     }
 }

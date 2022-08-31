@@ -8,18 +8,18 @@ public class Random {
      */
     public int size;
     public double last;
-    public double min;
-    public double max;
-    public double m = 4294967291.0;
-    public double seed = 2;
-    public double a = 4;
-    public double c = 4;
+    public int min;
+    public int max;
+    public Long m = new Long("4294967291");
+    public int seed = 2;
+    public int a = 4;
+    public int c = 4;
       
     /**
      * Construtor do objeto Random, necessita uma lista de valores aleatórios entre 0 e 1
      * @param valoresEntreZeroUm
      */
-    public Random(double min, double max, int size){
+    public Random(int min, int max, int size){
         this.size = size;
         this.min = min;
         this.max = max;
@@ -34,8 +34,6 @@ public class Random {
      * @return double
      */
     public double pseudoAleatorio(double aleatorio, int min, int max) {
-        //double a = Double.valueOf(min);
-        //double b = Double.valueOf(max);
         return (max - min) * aleatorio + min;
     }
     

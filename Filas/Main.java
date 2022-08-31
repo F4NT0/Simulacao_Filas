@@ -17,16 +17,6 @@ public class Main {
         double tempoGlobalInicial = 2.0; //tempo global do primeiro cliente
         int valoresAleatorios = 100000;
 
-        // Valores Aleatórios entre 0 e 1 colocados manualmente
-        //ArrayList<Double> valoresAleatorios = new ArrayList<>();
-        //valoresAleatorios.add(0.3276);
-        //valoresAleatorios.add(0.8851);
-        //valoresAleatorios.add(0.1643);
-        //valoresAleatorios.add(0.5542);
-        //valoresAleatorios.add(0.6813);
-        //valoresAleatorios.add(0.7221);
-        //valoresAleatorios.add(0.9881);
-
         // ====================================================
         // SIMULADOR INICIADO E APRESENTAÇÃO DOS DADOS INICIAIS
         // ====================================================
