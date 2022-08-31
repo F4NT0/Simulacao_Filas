@@ -7,7 +7,7 @@ public class Main {
 
     public static void main (String args[]) {
 
-        int c = 1; // número de atendentes (C)
+        int c = 2; // número de atendentes (C)
         int k = 5; // capacidade de pessoas na fila (K)
         int chMin = 2; // tempo de chegada mínima de um cliente
         int chMax = 4; // tempo de chegada máximo de um cliente

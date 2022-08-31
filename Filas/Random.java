@@ -11,10 +11,11 @@ public class Random {
     public int size;
     public double last;
     public double min;
-    public double m;
+    public double max;
+    public double m = 4294967291.0;
     public double seed = 2;
-    public double a = 2;
-    public double c = 1;
+    public double a = 4;
+    public double c = 4;
       
     /**
      * Construtor do objeto Random, necessita uma lista de valores aleatórios entre 0 e 1
@@ -23,8 +24,8 @@ public class Random {
     public Random(double min, double max, int size){
         this.size = size;
         this.min = min;
-        this.m = max;
-        this. seed = this.last = seed;
+        this.max = max;
+        this.last = this.seed;
     }
 
      /**
@@ -44,8 +45,8 @@ public class Random {
      * Gerador de valores aleatórios
      */
     public double next() {
+        this.last = (this.a * this.last + this.c) % this.m;
         size--;
-        last = (a * last + c) % m;
         return last;
     }
 
@@ -54,7 +55,7 @@ public class Random {
      * @return double
      */
     public double entreZeroUm() {
-        return next()/m;
+        return next()/this.m;
     }
 
 

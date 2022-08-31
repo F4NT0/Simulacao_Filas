@@ -38,7 +38,7 @@ public class Algoritmo {
             fila.updateClientesFila();
         
             if (fila.getClientesFila() <= c) {
-                double aleatorio = random.next();
+                double aleatorio = random.entreZeroUm();
                 double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
                 Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
                 escalonador.add(eventoSaida);
@@ -49,7 +49,7 @@ public class Algoritmo {
         }
 
         // nova chegada
-        double aleatorio = random.next();
+        double aleatorio = random.entreZeroUm();
         double pseudoAleatorio = random.pseudoAleatorio(aleatorio, chMin, chMax);
         Evento novoEvento = new Evento("ch", (fila.getTempoGlobal() + pseudoAleatorio));
         escalonador.add(novoEvento);
@@ -63,7 +63,7 @@ public class Algoritmo {
         fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
         fila.downgradeClientesFila();
         if (fila.getClientesFila() >= c) {
-            double aleatorio = random.next();
+            double aleatorio = random.entreZeroUm();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
             Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
             escalonador.add(eventoSaida);
