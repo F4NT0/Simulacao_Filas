@@ -8,5 +8,6 @@ cd ..
 cd Filas
 javac *.java
 java Main
-ls -la
+rm -rf Apresentacao/
+rm -rf *.class
 cd ..
