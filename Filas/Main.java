@@ -29,9 +29,9 @@ public class Main {
         // ====================================================
         // SIMULADOR INICIADO E APRESENTAÇÃO DOS DADOS INICIAIS
         // ====================================================
-        System.out.println(colors.BLUE + "===========================================");
-        System.out.println("============ SIMULADOR DE FILAS ===========");
-        System.out.println("===========================================" + colors.RESET);
+        System.out.println(colors.BLUE + "===========================================" + colors.RESET);
+        System.out.println(colors.BLUE + "============ SIMULADOR DE FILAS ===========" + colors.RESET);
+        System.out.println(colors.BLUE + "===========================================" + colors.RESET);
         System.out.println(colors.RED + "| Nota\u00E7\u00E3o: G/G/" + c + "/" + k + colors.RESET);
         System.out.println(colors.GREEN + "| Chegada Minima: " + chMin + " - Chegada Maxima: " + chMax + colors.RESET);
         System.out.println(colors.CYAN + "| Atendimento Minimo: " + atendMin + " - Atendimento Maximo: " + atendMax + colors.RESET);
