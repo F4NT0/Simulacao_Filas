@@ -10,10 +10,10 @@ public class Random {
     public double last;
     public int min;
     public int max;
-    public Long m = new Long("4294967291");
-    public int seed = 2;
-    public int a = 4;
-    public int c = 4;
+    public Long m = new Long("3762365390");
+    public int seed = 3;
+    public int a = 6;
+    public int c = 6;
       
     /**
      * Construtor do objeto Random, necessita uma lista de valores aleatórios entre 0 e 1

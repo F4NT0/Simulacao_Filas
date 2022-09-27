@@ -1,3 +1,4 @@
+package RafaelDosSantosCardoso;
 public class Main {
     public static void main(String[] args) {
         Random random = new Random(20, 1250, 100);
