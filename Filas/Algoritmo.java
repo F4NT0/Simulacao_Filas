@@ -11,6 +11,7 @@ public class Algoritmo {
     private Fila fila;
     private Escalonador escalonador;
     private Colors colors = new Colors();
+    private double tempoGlobal;
 
     /**
      * Construtor do Objeto do algoritmo de chegadas e saídas
@@ -25,6 +26,7 @@ public class Algoritmo {
         this.random = new Random(chMin, chMax, quantValores);
         this.fila = new Fila(k);
         this.escalonador = new Escalonador();
+        this.tempoGlobal = 0.0;
     }
 
     /**
@@ -33,14 +35,14 @@ public class Algoritmo {
     */
     public void chegada(Evento evento) {
         
-        fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
+        this.contabilizaTempo(evento.getTempo(), fila);
         if (fila.getClientesFila() < k) {
             fila.updateClientesFila();
         
             if (fila.getClientesFila() <= c) {
                 double aleatorio = random.entreZeroUm();
                 double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
-                Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
+                Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio));
                 escalonador.add(eventoSaida);
             }
         }
@@ -51,7 +53,7 @@ public class Algoritmo {
         // nova chegada
         double aleatorio = random.entreZeroUm();
         double pseudoAleatorio = random.pseudoAleatorio(aleatorio, chMin, chMax);
-        Evento novoEvento = new Evento("ch", (fila.getTempoGlobal() + pseudoAleatorio));
+        Evento novoEvento = new Evento("ch", (this.getTempoGlobal() + pseudoAleatorio));
         escalonador.add(novoEvento);
     } 
 
@@ -60,12 +62,12 @@ public class Algoritmo {
      * @param evento
     */
     public void saida(Evento evento) {
-        fila.contabilizaTempo(evento.getTempo(), fila.getClientesFila());
+        this.contabilizaTempo(evento.getTempo(), fila);
         fila.downgradeClientesFila();
         if (fila.getClientesFila() >= c) {
             double aleatorio = random.entreZeroUm();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
-            Evento eventoSaida = new Evento("sa",(fila.getTempoGlobal() + pseudoAleatorio));
+            Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio));
             escalonador.add(eventoSaida);
         }
     }
@@ -82,10 +84,10 @@ public class Algoritmo {
        visual.quadroFinalizacaoSimulacao();
 
         for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println(visual.meio() + " Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], fila.getTempoGlobal()) + "%" + colors.RESET);
+            System.out.println(visual.meio() + " Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], this.getTempoGlobal()) + "%" + colors.RESET);
             totalTempo += filaSalva[i];
         }
-        System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + fila.getTempoGlobal() + "\nPerda: " + fila.getPerdaClientes() + "\n");
+        System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + this.getTempoGlobal() + "\nPerda: " + fila.getPerdaClientes() + "\n");
     }
 
     /**
@@ -121,6 +123,21 @@ public class Algoritmo {
         escalonador.add(evento);
     }
 
+     /**
+     * Método que contabiliza o tempo quando é feito uma chegada ou saida
+     * @param tempo
+     * @param clientesFila
+     */
+    public void contabilizaTempo(double tempo, Fila fila) {
+        double filaSalva[] = fila.getEstadosFila();
+        double valorTempo = tempo - tempoGlobal;
+        if (fila.getClientesFila() <= fila.getEstadosFila().length) {
+            fila.setEstadosFila( fila.getClientesFila(), (filaSalva[fila.getClientesFila()] + valorTempo)
+            );
+            setTempoGlobal(tempoGlobal + valorTempo);
+        }
+    }
+
     // =================
     // GETTERS E SETTERS
     // =================
@@ -130,6 +147,14 @@ public class Algoritmo {
 
     public int getK() {
         return k;
+    }
+
+    public double getTempoGlobal() {
+        return tempoGlobal;
+    }
+
+    public void setTempoGlobal(double tempoGlobal) {
+        this.tempoGlobal = tempoGlobal;
     }
 
     public int getChMin() {

@@ -2,7 +2,7 @@
 public class Fila {
  
     private int clientesFila;
-    private double tempoGlobal;
+    
     private double[] estadosFila;
     private int perdaClientes;
 
@@ -14,22 +14,10 @@ public class Fila {
      */
     public Fila(int k) {
         this.estadosFila = new double[k+1];
-        this.tempoGlobal = 0.0;
         this.clientesFila = 0;
     }
 
-    /**
-     * Método que contabiliza o tempo quando é feito uma chegada ou saida
-     * @param tempo
-     * @param clientesFila
-     */
-    public void contabilizaTempo(double tempo, int clientesFila) {
-        double valorTempo = tempo - tempoGlobal;
-        if (clientesFila <= estadosFila.length) {
-            estadosFila[clientesFila] = estadosFila[clientesFila] + valorTempo;
-            setTempoGlobal(tempoGlobal + valorTempo);
-        }
-    }
+   
 
     // ==========================
     // INICIALIZADORES E UPDATES
@@ -67,20 +55,16 @@ public class Fila {
         return estadosFila;
     }
 
+    public void setEstadosFila(int i, double value) {
+        estadosFila[i] = value;
+    }
+
     public int getClientesFila() {
         return clientesFila;
     }
 
     public void setClientesFila(int clientesFila) {
         this.clientesFila = clientesFila;
-    }
-
-    public double getTempoGlobal() {
-        return tempoGlobal;
-    }
-
-    public void setTempoGlobal(double tempoGlobal) {
-        this.tempoGlobal = tempoGlobal;
     }
 
     public int getPerdaClientes() {
