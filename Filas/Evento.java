@@ -5,20 +5,26 @@
 public class Evento {
     private String tipoEvento;
     private double tempo;
+    private int numFila;
 
     /**
      * Construtor do objeto Evento
      * @param tipoEvento
      * @param tempo
      */
-    public Evento(String tipoEvento, double tempo) {
+    public Evento(String tipoEvento, double tempo, int numFila) {
         this.tipoEvento = tipoEvento;
         this.tempo = tempo;
+        this.numFila = numFila;
     }
 
     // =================
     // GETTERS E SETTERS
     // =================
+    public int getNumFila() {
+        return numFila;
+    }
+
     public String getTipoEvento() {
         return tipoEvento;
     }

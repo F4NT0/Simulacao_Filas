@@ -13,7 +13,7 @@ public class Main {
         // =====================================================
 
         int c = 1; // número de atendentes (C)
-        int k = 5; // capacidade de pessoas na fila (K)
+        int[] k = {5, 1}; // capacidade de pessoas na fila (K)
         int chMin = 2; // tempo de chegada mínima de um cliente
         int chMax = 4; // tempo de chegada máximo de um cliente
         int atendMin = 3; // tempo de atendimento mínimo do cliente
@@ -44,7 +44,11 @@ public class Main {
                 if (evento.getTipoEvento().equals("sa")) {
                         algoritmo.saida(evento);
                 } else {
+                    if(evento.getTipoEvento().equals("sa")){
+                        algoritmo.passagem(evento);
+                    } else{
                         System.out.println("Erro!");
+                    }
                 }
             }
         }

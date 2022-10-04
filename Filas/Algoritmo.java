@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import Apresentacao.Colors;
 import Apresentacao.Visual;
 
@@ -6,9 +9,10 @@ import Apresentacao.Visual;
  */
 public class Algoritmo {
 
-    private int c, k, chMin, chMax, atendMin, atendMax;
+    private int c, chMin, chMax, atendMin, atendMax;
+    private int[] k;
     private Random random;
-    private Fila fila;
+    private ArrayList<Fila> filas = new ArrayList<Fila>();
     private Escalonador escalonador;
     private Colors colors = new Colors();
     private double tempoGlobal;
@@ -16,7 +20,7 @@ public class Algoritmo {
     /**
      * Construtor do Objeto do algoritmo de chegadas e saídas
     */
-    public Algoritmo(int c, int k, int chMin, int chMax, int atendMin, int atendMax, int quantValores) {
+    public Algoritmo(int c, int[] k, int chMin, int chMax, int atendMin, int atendMax, int quantValores) {
         this.c = c;
         this.k = k;
         this.chMin = chMin;
@@ -24,7 +28,9 @@ public class Algoritmo {
         this.atendMin = atendMin;
         this.atendMax = atendMax;
         this.random = new Random(chMin, chMax, quantValores);
-        this.fila = new Fila(k);
+        for (int i : k) {
+            this.filas.add(new Fila(i));
+        }
         this.escalonador = new Escalonador();
         this.tempoGlobal = 0.0;
     }
@@ -34,27 +40,28 @@ public class Algoritmo {
      * @param evento
     */
     public void chegada(Evento evento) {
-        
-        this.contabilizaTempo(evento.getTempo(), fila);
-        if (fila.getClientesFila() < k) {
-            fila.updateClientesFila();
-        
-            if (fila.getClientesFila() <= c) {
+                    
+        this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
+        if (filas.get(evento.getNumFila()).getClientesFila() < k[evento.getNumFila()]) {
+            filas.get(evento.getNumFila()).updateClientesFila();
+            
+            if (filas.get(evento.getNumFila()).getClientesFila() <= c) {
                 double aleatorio = random.entreZeroUm();
                 double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
-                Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio));
+                Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila());
                 escalonador.add(eventoSaida);
             }
         }
         else {
-            fila.setPerdaClientes(fila.getPerdaClientes()+1);
+            filas.get(evento.getNumFila()).setPerdaClientes(filas.get(evento.getNumFila()).getPerdaClientes()+1);
         }
-
+                
         // nova chegada
         double aleatorio = random.entreZeroUm();
         double pseudoAleatorio = random.pseudoAleatorio(aleatorio, chMin, chMax);
-        Evento novoEvento = new Evento("ch", (this.getTempoGlobal() + pseudoAleatorio));
+        Evento novoEvento = new Evento("ch", (this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila());
         escalonador.add(novoEvento);
+    
     } 
 
     /**
@@ -62,32 +69,42 @@ public class Algoritmo {
      * @param evento
     */
     public void saida(Evento evento) {
-        this.contabilizaTempo(evento.getTempo(), fila);
-        fila.downgradeClientesFila();
-        if (fila.getClientesFila() >= c) {
+        this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
+        filas.get(evento.getNumFila()).downgradeClientesFila();
+        if (filas.get(evento.getNumFila()).getClientesFila() >= c) {
             double aleatorio = random.entreZeroUm();
             double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin, atendMax);
-            Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio));
+            Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio),evento.getNumFila());
             escalonador.add(eventoSaida);
+            if (evento.getNumFila()+1 < filas.size()) {
+                passagem(new Evento("pa",(this.getTempoGlobal()+ pseudoAleatorio), evento.getNumFila()+1 ));
+            }
         }
+    }
+
+    public void passagem(Evento evento) {
+        chegada(evento);
     }
 
     /**
      * Apresentação do resultado final do programa e resultados
      */
     public void filaEstadosResultadoFinal() {
-        Visual visual = new Visual();
-
-        double filaSalva[] = fila.getEstadosFila();
-        double totalTempo = 0.0;
-
-       visual.quadroFinalizacaoSimulacao();
-
-        for (int i = 0 ; i < filaSalva.length ; i++) {
-            System.out.println(visual.meio() + " Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], this.getTempoGlobal()) + "%" + colors.RESET);
-            totalTempo += filaSalva[i];
+        for (Fila fila : filas) {
+            
+            Visual visual = new Visual();
+            
+            double filaSalva[] = fila.getEstadosFila();
+            double totalTempo = 0.0;
+            
+            visual.quadroFinalizacaoSimulacao();
+            
+            for (int i = 0 ; i < filaSalva.length ; i++) {
+                System.out.println(visual.meio() + " Estado da fila " + i + " = " + colors.BLUE_BRIGHT + filaSalva[i]  + colors.RESET + " | probabilidade = " + colors.GREEN_BRIGHT + calculoProbabilidade(filaSalva[i], this.getTempoGlobal()) + "%" + colors.RESET);
+                totalTempo += filaSalva[i];
+            }
+            System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + this.getTempoGlobal() + "\nPerda: " + fila.getPerdaClientes() + "\n");
         }
-        System.out.println("\nTotal dos valores no vetor : " + totalTempo + "\nTotal do tempo global:  " + this.getTempoGlobal() + "\nPerda: " + fila.getPerdaClientes() + "\n");
     }
 
     /**
@@ -119,7 +136,7 @@ public class Algoritmo {
      * @param tempoInicial
     */
     public void primeiroEvento(String tipo, double tempoInicial) {
-        Evento evento = new Evento(tipo, tempoInicial);
+        Evento evento = new Evento(tipo, tempoInicial, 0);
         escalonador.add(evento);
     }
 
@@ -145,8 +162,8 @@ public class Algoritmo {
         return c;
     }
 
-    public int getK() {
-        return k;
+    public int getK(int i) {
+        return k[i];
     }
 
     public double getTempoGlobal() {
@@ -177,8 +194,8 @@ public class Algoritmo {
         return random;
     }
 
-    public Fila getFila() {
-        return fila;
+    public Fila getFila(int i) {
+        return filas.get(i);
     }
 
     public Escalonador getEscalonador() {

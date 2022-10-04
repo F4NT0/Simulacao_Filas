@@ -10,7 +10,7 @@ public class Random {
     public double last;
     public int min;
     public int max;
-    public Long m = new Long("4294967291");
+    public Long m = (long) 4294967291.0;
     public int seed = 2;
     public int a = 4;
     public int c = 4;
