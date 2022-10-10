@@ -12,13 +12,13 @@ public class Main {
         // AREA DE COLOCAR OS DADOS NECESSARIOS PARA A SIMULACAO
         // =====================================================
 
-        int c = 1; // número de atendentes (C)
-        int[] k = {5, 1}; // capacidade de pessoas na fila (K)
+        int[] c = {2, 1}; // número de atendentes (C)
+        int[] k = {3, 3}; // capacidade de pessoas na fila (K)
         int chMin = 2; // tempo de chegada mínima de um cliente
-        int chMax = 4; // tempo de chegada máximo de um cliente
-        int atendMin = 3; // tempo de atendimento mínimo do cliente
-        int atendMax = 5; // tempo de atendimento máximo do cliente
-        double tempoGlobalInicial = 2.0; //tempo global do primeiro cliente
+        int chMax = 3; // tempo de chegada máximo de um cliente
+        int[] atendMin = {2, 3}; // tempo de atendimento mínimo do cliente
+        int[] atendMax = {5, 5}; // tempo de atendimento máximo do cliente
+        double tempoGlobalInicial = 2.5; //tempo global do primeiro cliente
         int valoresAleatorios = 100000;
 
         // ====================================================
@@ -44,7 +44,7 @@ public class Main {
                 if (evento.getTipoEvento().equals("sa")) {
                         algoritmo.saida(evento);
                 } else {
-                    if(evento.getTipoEvento().equals("sa")){
+                    if(evento.getTipoEvento().equals("pa")){
                         algoritmo.passagem(evento);
                     } else{
                         System.out.println("Erro!");
