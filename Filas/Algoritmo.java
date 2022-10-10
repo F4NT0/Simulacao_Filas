@@ -40,15 +40,18 @@ public class Algoritmo {
      * @param evento
     */
     public void chegada(Evento evento) {
-            /* count tempo
-             * se fila < fila1.k
-             *  fila ++
-             *  se fila1 <= fila1.c(?)
-             *     agenda passagem fila 1 pra fila 2 (t.g. + random(taxa de atendimento da fila 1))
-             * senao perda1 ++
-             * agenda chegada (t.g. + random(taxa de chegada))
-             */
-        System.out.println( filas.get(evento.getNumFila()));// testando o output do  filas.get(evento.getNumFila()) sozinho, assim como com +1 e -1            
+        /* count tempo
+        * se fila < fila1.k
+        *  fila ++
+        *  se fila1 <= fila1.c(?)
+        *     agenda passagem fila 1 pra fila 2 (t.g. + random(taxa de atendimento da fila 1))
+        * senao perda1 ++
+        * agenda chegada (t.g. + random(taxa de chegada))
+        */
+        // System.out.println(filas);
+        // System.out.println(filas.get(evento.getNumFila()+1));// testando o output do  filas.get(evento.getNumFila()) sozinho, assim como com +1 e -1            
+        // System.out.println(filas.get(evento.getNumFila()));
+
         this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
         if (filas.get(evento.getNumFila()).getClientesFila() < k[evento.getNumFila()]) {
             filas.get(evento.getNumFila()).updateClientesFila();
@@ -56,8 +59,8 @@ public class Algoritmo {
             if (filas.get(evento.getNumFila()).getClientesFila() <= c[evento.getNumFila()]) {
                 double aleatorio = random.entreZeroUm();
                 double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()], atendMax[evento.getNumFila()]);
-                Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila());
-                escalonador.add(eventoSaida);
+                Evento eventoPassagem = new Evento("pa",(this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila());
+                escalonador.add(eventoPassagem);
             }
         }
         else {
@@ -77,21 +80,24 @@ public class Algoritmo {
      * @param evento
     */
     public void saida(Evento evento) {
-        /*
+        /* 
          * count tempo
          * fila2 --
          * se fila2 >= fila2.c(?)
          * agenda saida2 (t.g. + random(taxa de atendimento da fila dois))
          */
-        this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
-        filas.get(evento.getNumFila()).downgradeClientesFila();
-        if (filas.get(evento.getNumFila()).getClientesFila() >= c[evento.getNumFila()]) {
-            double aleatorio = random.entreZeroUm();
-            double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()], atendMax[evento.getNumFila()]);
-            Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio),evento.getNumFila());
-            escalonador.add(eventoSaida);
-            if (evento.getNumFila()+1 < filas.size()) {// menor ou igual?
-                passagem(new Evento("pa",(this.getTempoGlobal()+ pseudoAleatorio), evento.getNumFila()+1 ));
+        double aleatorio = random.entreZeroUm();
+        double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()], atendMax[evento.getNumFila()]);
+        if (evento.getNumFila() < filas.size()-1) {// menor ou igual?
+            passagem(new Evento("pa",(evento.getTempo()), evento.getNumFila()));
+        }
+        else {
+            this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
+            filas.get(evento.getNumFila()).downgradeClientesFila();
+            if (filas.get(evento.getNumFila()).getClientesFila() >= c[evento.getNumFila()]) {
+                Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio),evento.getNumFila());
+                escalonador.add(eventoSaida);
+                
             }
         }
     }
@@ -103,31 +109,31 @@ public class Algoritmo {
          * se fila >= 1
          *     agenda passagem(t.g. + random(taxa de atendimento da fila 1))
          * se fila < fila2.k
-         *    fila ++
+         *    fila2 ++
          *    se fila <= fila2.c(?)
          *       agenda saida da fila 2 (t.g. + random(taxa de atendimento da fila 2))
          * senao perda2 ++;
          *
          */
         this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
-        filas.get(evento.getNumFila()-1).downgradeClientesFila();
-        if (filas.get(evento.getNumFila()-1).getClientesFila() >= c[evento.getNumFila()-1]) {
+        filas.get(evento.getNumFila()).downgradeClientesFila();
+        if (filas.get(evento.getNumFila()).getClientesFila() >= c[evento.getNumFila()]) {
             double aleatorio = random.entreZeroUm();
-            double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()-1], atendMax[evento.getNumFila()-1]);
+            double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()], atendMax[evento.getNumFila()]);
             Evento eventoPassagem = new Evento("pa", (this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila());
             escalonador.add(eventoPassagem);
         }
-        if (filas.get(evento.getNumFila()).getClientesFila() < k[evento.getNumFila()]) {
-            filas.get(evento.getNumFila()).updateClientesFila();
-            if (filas.get(evento.getNumFila()).getClientesFila() <= c[evento.getNumFila()]) {
+        if (filas.get(evento.getNumFila()+1).getClientesFila() < k[evento.getNumFila() + 1]) {
+            filas.get(evento.getNumFila()+1).updateClientesFila();
+            if (filas.get(evento.getNumFila()+1).getClientesFila() <= c[evento.getNumFila()+1]) {
                 double aleatorio = random.entreZeroUm();
-                double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()], atendMax[evento.getNumFila()]);
-                Evento eventoSaida = new Evento("sa", (this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila());
+                double pseudoAleatorio = random.pseudoAleatorio(aleatorio, atendMin[evento.getNumFila()+1], atendMax[evento.getNumFila()+1]);
+                Evento eventoSaida = new Evento("sa", (this.getTempoGlobal() + pseudoAleatorio), evento.getNumFila()+1);
                 escalonador.add(eventoSaida);
             }
         }
         else {
-            filas.get(evento.getNumFila()).setPerdaClientes(filas.get(evento.getNumFila()).getPerdaClientes()+1);
+            filas.get(evento.getNumFila()+1).setPerdaClientes(filas.get(evento.getNumFila()+1).getPerdaClientes()+1);
         }
     }
 
@@ -193,7 +199,7 @@ public class Algoritmo {
     public void contabilizaTempo(double tempo, Fila fila) {
         double filaSalva[] = fila.getEstadosFila();
         double valorTempo = tempo - tempoGlobal;
-        if (fila.getClientesFila() <= fila.getEstadosFila().length) {
+        if (fila.getClientesFila() < fila.getEstadosFila().length) {
             fila.setEstadosFila( fila.getClientesFila(), (filaSalva[fila.getClientesFila()] + valorTempo)
             );
             setTempoGlobal(tempoGlobal + valorTempo);
