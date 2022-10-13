@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import Apresentacao.Colors;
@@ -64,7 +63,7 @@ public class Algoritmo {
             }
         }
         else {
-            filas.get(evento.getNumFila()).setPerdaClientes(filas.get(evento.getNumFila()).getPerdaClientes()+1);
+            filas.get(evento.getNumFila()).setLostClients(filas.get(evento.getNumFila()).getPerdaClientes()+1);
         }
                 
         // nova chegada
@@ -133,7 +132,7 @@ public class Algoritmo {
             }
         }
         else {
-            filas.get(evento.getNumFila()+1).setPerdaClientes(filas.get(evento.getNumFila()+1).getPerdaClientes()+1);
+            filas.get(evento.getNumFila()+1).setLostClients(filas.get(evento.getNumFila()+1).getPerdaClientes()+1);
         }
     }
 

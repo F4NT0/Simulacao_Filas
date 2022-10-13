@@ -12,6 +12,7 @@ public class Main {
         // AREA DE COLOCAR OS DADOS NECESSARIOS PARA A SIMULACAO
         // =====================================================
 
+        //Fila fila1 = new Fila(2, 2, );
         int[] c = {2, 1}; // número de atendentes (C)
         int[] k = {3, 3}; // capacidade de pessoas na fila (K)
         int chMin = 2; // tempo de chegada mínima de um cliente
