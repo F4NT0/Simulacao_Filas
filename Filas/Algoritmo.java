@@ -52,7 +52,7 @@ public class Algoritmo {
         // System.out.println(filas.get(evento.getNumFila()+1));// testando o output do  filas.get(evento.getNumFila()) sozinho, assim como com +1 e -1            
         // System.out.println(filas.get(evento.getNumFila()));
 
-        this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
+        this.contabilizaTempo(evento.getTempo());
         if (filas.get(evento.getNumFila()).getClientesFila() < k[evento.getNumFila()]) {
             filas.get(evento.getNumFila()).updateClientesFila();
             
@@ -92,7 +92,7 @@ public class Algoritmo {
             passagem(new Evento("pa",(evento.getTempo()), evento.getNumFila()));
         }
         else {
-            this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
+            this.contabilizaTempo(evento.getTempo());
             filas.get(evento.getNumFila()).downgradeClientesFila();
             if (filas.get(evento.getNumFila()).getClientesFila() >= c[evento.getNumFila()]) {
                 Evento eventoSaida = new Evento("sa",(this.getTempoGlobal() + pseudoAleatorio),evento.getNumFila());
@@ -115,7 +115,7 @@ public class Algoritmo {
          * senao perda2 ++;
          *
          */
-        this.contabilizaTempo(evento.getTempo(), filas.get(evento.getNumFila()));
+        this.contabilizaTempo(evento.getTempo());
         filas.get(evento.getNumFila()).downgradeClientesFila();
         if (filas.get(evento.getNumFila()).getClientesFila() >= c[evento.getNumFila()]) {
             double aleatorio = random.entreZeroUm();
@@ -167,7 +167,7 @@ public class Algoritmo {
     public String calculoProbabilidade(double valorPosicao, double valorFinal) {
         double divisaoPercentagem = valorPosicao/valorFinal;
         double percentagem = divisaoPercentagem*100;
-        String apresentacaoValor = Double.toString(percentagem).substring(0, 5);
+        String apresentacaoValor = Double.toString(percentagem);
         return apresentacaoValor;
     }
 
@@ -196,13 +196,16 @@ public class Algoritmo {
      * @param tempo
      * @param clientesFila
      */
-    public void contabilizaTempo(double tempo, Fila fila) {
-        double filaSalva[] = fila.getEstadosFila();
+    public void contabilizaTempo(double tempo) {
         double valorTempo = tempo - tempoGlobal;
-        if (fila.getClientesFila() < fila.getEstadosFila().length) {
-            fila.setEstadosFila( fila.getClientesFila(), (filaSalva[fila.getClientesFila()] + valorTempo)
-            );
-            setTempoGlobal(tempoGlobal + valorTempo);
+
+        for (Fila fila : filas) {
+            
+            if (fila.getClientesFila() < fila.getEstadosFila().length) {
+                fila.setEstadosFila( fila.getClientesFila(), (fila.getEstadosFila()[fila.getClientesFila()] + valorTempo)
+                );
+                setTempoGlobal(tempoGlobal + valorTempo);
+            }
         }
     }
 
