@@ -3,41 +3,42 @@
  * Classe Objeto do Evento com o tipo e o tempo
  */
 public class Evento {
-    private String tipoEvento;
+    public static enum TipoEvento {
+        CHEGADA,
+        SAIDA,
+        PASSAGEM
+    }
+
+    private TipoEvento tipoEvento;
     private double tempo;
-    private int numFila;
+    private Fila from;
+    private Fila to;
 
     /**
      * Construtor do objeto Evento
      * @param tipoEvento
      * @param tempo
      */
-    public Evento(String tipoEvento, double tempo, int numFila) {
+    public Evento(TipoEvento tipoEvento, double tempo, Fila from, Fila to) {
         this.tipoEvento = tipoEvento;
         this.tempo = tempo;
-        this.numFila = numFila;
+        this.from = from;
+        this.to = to;
     }
 
-    // =================
-    // GETTERS E SETTERS
-    // =================
-    public int getNumFila() {
-        return numFila;
+    public Fila getOrigem(){
+        return from;
     }
 
-    public String getTipoEvento() {
+    public Fila getDestino(){
+        return to;
+    }
+
+    public TipoEvento getTipoEvento() {
         return tipoEvento;
-    }
-
-    public void setTipoEvento(String tipoEvento) {
-        this.tipoEvento = tipoEvento;
     }
 
     public double getTempo() {
         return tempo;
-    }
-
-    public void setTempo(double tempo) {
-        this.tempo = tempo;
     }
 }

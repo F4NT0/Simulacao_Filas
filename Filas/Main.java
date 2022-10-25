@@ -1,62 +1,36 @@
-
-import Apresentacao.Colors;
-import Apresentacao.Visual;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main (String args[]) {
-        Colors colors = new Colors();
-        Visual visual = new Visual();
+        int iterations = 100000;
 
-        // =====================================================
-        // AREA DE COLOCAR OS DADOS NECESSARIOS PARA A SIMULACAO
-        // =====================================================
+        Fila fila1 = new Fila("fila1", 2, 3, new Fila.Time(2, 3), new Fila.Time(2, 5));
+        Fila fila2 = new Fila("fila2", 1, 3, new Fila.Time(3, 5));
 
-        //Fila fila1 = new Fila(2, 2, );
-        int[] c = {2, 1}; // número de atendentes (C)
-        int[] k = {3, 3}; // capacidade de pessoas na fila (K)
-        int chMin = 2; // tempo de chegada mínima de um cliente
-        int chMax = 3; // tempo de chegada máximo de um cliente
-        int[] atendMin = {2, 3}; // tempo de atendimento mínimo do cliente
-        int[] atendMax = {5, 5}; // tempo de atendimento máximo do cliente
-        double tempoGlobalInicial = 2.5; //tempo global do primeiro cliente
-        int valoresAleatorios = 100000;
+        Escalonador scheduler = new Escalonador(Arrays.asList(fila1, fila2));
+        scheduler.add(new Evento(Evento.TipoEvento.CHEGADA, 2.5, fila1, null));
 
-        // ====================================================
-        // SIMULADOR INICIADO E APRESENTAÇÃO DOS DADOS INICIAIS
-        // ====================================================
-        visual.quadroApresentacaoSimulador();
-        System.out.println(colors.RED + "\u2551 Nota\u00E7\u00E3o: G/G/" + c + "/" + k + colors.RESET);
-        System.out.println(colors.GREEN + "\u2551 Chegada Minima: " + chMin + " - Chegada Maxima: " + chMax + colors.RESET);
-        System.out.println(colors.CYAN + "\u2551 Atendimento Minimo: " + atendMin + " - Atendimento Maximo: " + atendMax + colors.RESET);
-        System.out.println(colors.PURPLE + "\u2551 Tempo Global do primeiro cliente: " + tempoGlobalInicial + colors.RESET);
+        MapeadorFilas mapper = new MapeadorFilas();
+        mapper.addNext(fila1, fila2);
 
-        // =================================================
-        // ALGORITMO DE INICIAÇÃO E TRARAMENTO DA SIMULAÇÃO
-        // =================================================
-        Algoritmo algoritmo = new Algoritmo(c, k, chMin, chMax, atendMin, atendMax, valoresAleatorios);
-        algoritmo.primeiroEvento("ch", tempoGlobalInicial);
-         
-        while(algoritmo.getRandom().tamanhoRandom() > 0) {
-            Evento evento = algoritmo.getEscalonador().next();
-            if (evento.getTipoEvento().equals("ch")) {
-                algoritmo.chegada(evento);
-            } else {
-                if (evento.getTipoEvento().equals("sa")) {
-                        algoritmo.saida(evento);
-                } else {
-                    if(evento.getTipoEvento().equals("pa")){
-                        algoritmo.passagem(evento);
-                    } else{
-                        System.out.println("Erro!");
-                    }
-                }
+        Algoritmo alg = new Algoritmo(mapper, scheduler);
+
+        for(int i = 0; i < iterations; i++) {
+            Evento evento = scheduler.next();
+            switch(evento.getTipoEvento()){
+                case CHEGADA:
+                    alg.chegada(evento);
+                    break;
+                case SAIDA:
+                    alg.saida(evento);
+                    break;
+                case PASSAGEM:
+                    alg.passagem(evento);
+                    break;
             }
         }
-        
-        // ====================
-        // RETORNO DA SIMULAÇÃO
-        // ====================
-        algoritmo.filaEstadosResultadoFinal();
+
+        new Report().print(scheduler.getQueuesTimes(), scheduler.getGlobalTime());
     }
 }
