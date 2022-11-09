@@ -1,93 +1,93 @@
-
 public class Fila {
- 
-    private int clientesFila;
-    private double tempoGlobal;
-    private double[] estadosFila;
-    private int perdaClientes;
 
+    public static class Time{
+        public int min;
+        public int max;
 
-    /**
-     * Construtor do Objeto de filas, necessita o valor da 
-     * capacidade de clientes na fila como atributo
-     * @param k
-     */
-    public Fila(int k) {
-        this.estadosFila = new double[k+1];
-        this.tempoGlobal = 0.0;
-        this.clientesFila = 0;
-    }
-
-    /**
-     * Método que contabiliza o tempo quando é feito uma chegada ou saida
-     * @param tempo
-     * @param clientesFila
-     */
-    public void contabilizaTempo(double tempo, int clientesFila) {
-        double valorTempo = tempo - tempoGlobal;
-        if (clientesFila <= estadosFila.length) {
-            estadosFila[clientesFila] = estadosFila[clientesFila] + valorTempo;
-            setTempoGlobal(tempoGlobal + valorTempo);
+        public Time(int min, int max) {
+            this.min = min;
+            this.max = max;
         }
     }
 
-    // ==========================
-    // INICIALIZADORES E UPDATES
-    // ==========================
+    private String name;
+    private int clients;
+    private int servers;
+    private int capacity;
+    private int lost_clients;
+    private Time arrival_time;
+    private Time service_time;
 
-    /**
-     * Incrementa o números de clientes na fila
-     */
-    public void updateClientesFila(){
-        clientesFila++;
+    
+    public Fila(String name, int c, int k, Time service_time){
+        this(name, c, k, new Time(0, 0), service_time);
+    }
+    
+    public Fila(String name, int c, int k, Time arrival_time, Time service_time) {
+        this.name = name;
+        this.clients = 0;
+        this.servers = c;
+        this.capacity = k;
+        this.lost_clients = 0;
+        this.arrival_time = arrival_time;
+        this.service_time = service_time;
     }
 
-    /**
-     * Decrementa o número de clientes na fila
-     */
-    public void downgradeClientesFila() {
-        clientesFila--;
+    public String getName(){
+        return this.name;
     }
 
-    /**
-     * Inicia o vetor de estados da fila com zeros
-     */
-    public void initEstadosFila() {
-        int verificador = 0;
-        while (estadosFila.length > verificador) {
-            estadosFila[verificador] = 0.0;
-            verificador++;
-        }
+    public void addClient() {
+        this.clients++;
     }
 
-    // =================
-    // GETTERS E SETTERS
-    // =================
-    public double[] getEstadosFila() {
-        return estadosFila;
+    public void removeClient() {
+        this.clients--; 
     }
 
-    public int getClientesFila() {
-        return clientesFila;
+    public void addPerda(){
+        this.lost_clients ++;
     }
 
-    public void setClientesFila(int clientesFila) {
-        this.clientesFila = clientesFila;
+    public int getCapacity(){
+        return this.capacity;
     }
 
-    public double getTempoGlobal() {
-        return tempoGlobal;
+    public int getServers(){
+        return this.servers;
     }
 
-    public void setTempoGlobal(double tempoGlobal) {
-        this.tempoGlobal = tempoGlobal;
+    public int getClients() {
+        return clients;
     }
 
-    public int getPerdaClientes() {
-        return perdaClientes;
+    public int getLostClients() {
+        return lost_clients;
     }
 
-    public void setPerdaClientes(int perdaClientes) {
-        this.perdaClientes = perdaClientes;
+
+    public Time getArrivalTime() {
+        return arrival_time;
+    }
+
+    public Time getServiceTime() {
+        return service_time;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof Fila))
+            return false;
+        
+        Fila otherFila = (Fila) other;
+        return this.clients == otherFila.clients && 
+                this.capacity == otherFila.capacity && 
+                this.lost_clients == otherFila.lost_clients &&
+                this.servers == otherFila.servers;
+    }
+
+    @Override
+    public String toString() {
+        return "Fila(" + this.name + ", " + this.clients + ", " + this.servers + ", " + this.lost_clients + ")";
     }
 }

@@ -1,20 +1,39 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
  * Escalonador trata os Eventos da fila
  */
 public class Escalonador {
+    public class QueueTimes {
+        public Fila queue;
+        public double[] times;
 
-    PriorityQueue<Double> queue;
-    ArrayList<Evento> eventos;
+        public QueueTimes(Fila f) {
+            this.queue = f;
+            this.times = new double[f.getCapacity() + 1];
+        }
+    }
+
+    private double globalTime;
+    private List<QueueTimes> queuesTimes;
+    private PriorityQueue<Evento> eventos;
     
     /**
      * Construtor do Escalonador, ele inicia uma priority queue de Eventos
      */
-    public Escalonador(){
-        queue = new PriorityQueue<Double>();
-        eventos = new ArrayList<Evento>();
+    public Escalonador(List<Fila> filas){
+        this.globalTime = 0.0;
+        this.eventos = new PriorityQueue<Evento>((e1, e2) -> {
+            if (e1.getTempo() > e2.getTempo()) return 1;
+            else if (e1.getTempo() < e2.getTempo()) return -1;
+            return 0;
+        });
+
+        this.queuesTimes = new ArrayList<>();
+        for(Fila f: filas) 
+            queuesTimes.add(new QueueTimes(f));
     }
     
     /**
@@ -23,7 +42,6 @@ public class Escalonador {
      */
     public void add(Evento evento){
         eventos.add(evento);
-        queue.add(evento.getTempo());
     }
 
     /**
@@ -31,28 +49,21 @@ public class Escalonador {
      * @return Evento
      */
     public Evento next() {
-        double tempo = queue.poll();
-        for (Evento evento : eventos) {
-            if (evento.getTempo() == tempo) {
-                Evento eventoRetorno = evento;
-                eventos.remove(evento);
-                return eventoRetorno;
-            }
-        }
-        return null;
+        return eventos.poll();
     }
 
-    /**
-     * Verifica o primeiro evento da fila
-     * @return
-     */
-    public Evento verify() {
-        double tempo = queue.peek();
-        for (Evento evento : eventos) {
-            if (evento.getTempo() == tempo) {
-                return evento;
-            }
-        }
-        return null;
+    public void contabilizaTempo(Evento evento){
+        double delta = evento.getTempo() - this.globalTime;
+        for(QueueTimes queueTimes: queuesTimes)
+            queueTimes.times[queueTimes.queue.getClients()] += delta;
+        this.globalTime = evento.getTempo();
+    }
+
+    public List<QueueTimes> getQueuesTimes(){
+            return queuesTimes;
+    }
+
+    public double getGlobalTime(){
+        return globalTime;
     }
 }
