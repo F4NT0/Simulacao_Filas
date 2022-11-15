@@ -1,10 +1,10 @@
 public class Fila {
 
     public static class Time{
-        public int min;
-        public int max;
+        public double min;
+        public double max;
 
-        public Time(int min, int max) {
+        public Time(double min, double max) {
             this.min = min;
             this.max = max;
         }

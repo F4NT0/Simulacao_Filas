@@ -27,7 +27,7 @@ public class Random {
         return (this.last = (this.last * this.a + this.c) % this.m) / this.m;
     }
 
-    public double nextInRange(int min, int max){
+    public double nextInRange(double min, double max){
         return (max - min) * this.next() + min;
     }
 }

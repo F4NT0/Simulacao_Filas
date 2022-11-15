@@ -17,7 +17,7 @@ public class Report {
             System.out.println("Number of losses: " + queueTimes.queue.getLostClients());
             System.out.println("************************************************************");
         }
-
+        
         System.out.println("Simulation time: " + globalTime);
     }
 }
